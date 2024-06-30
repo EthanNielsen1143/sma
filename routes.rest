@@ -1,0 +1,39 @@
+
+# Base URL
+GET http://localhost:8080
+
+### ALL Temples
+GET http://localhost:8080/temples
+
+### SPECIFIC Temple (first example)
+GET http://localhost:8080/temples/61a921f6028954d4f0319e72
+
+### Create a new temple
+POST http://localhost:8080/temples HTTP/1.1
+content-type: application/json
+
+{
+    "_id": "61a921f6028954d4f0319e8a",
+    "temple_id": 30,
+    "additionalInfo": false,
+    "name": "Bogotá Colombia Temple",
+    "location": "Bogotá, Distrito Capital, Colombia",
+    "dedicated": "24 April 1999"
+}
+
+### Update a temple
+PUT http://localhost:8080/temples/61a921f6028954d4f0319e72 HTTP/1.1
+content-type: application/json
+
+{
+    "_id": "61a921f6028954d4f0319e6d",
+    "temple_id": 1,
+    "additionalInfo": false,
+    "name": "Aba Nigeria Temple",
+    "location": "Aba, Abia, Nigeria",
+    "dedicated": "7 August 2005"
+}
+
+### Delete a temple
+DELETE http://localhost:8080/temples/6681ca3bb92d7a105614c3e5 HTTP/1.1
+content-type: application/json

@@ -5,7 +5,7 @@ const doc = {
         title: "Temples API",
         description: "A simple API to manage temples",
     },
-    host: "https://webserv34134.onrender.com",
+    host: "webserv34134.onrender.com",
     schemes: ['https', 'http'],
 };
 

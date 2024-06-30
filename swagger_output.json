@@ -5,7 +5,7 @@
     "description": "A simple API to manage temples",
     "version": "1.0.0"
   },
-  "host": "https://webserv34134.onrender.com",
+  "host": "webserv34134.onrender.com",
   "basePath": "/",
   "schemes": [
     "https",

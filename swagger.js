@@ -5,7 +5,7 @@ const doc = {
         title: "spills API",
         description: "A simple API to manage spills",
     },
-    host: "localhost:8080",
+    host: "sma-86vz.onrender.com",
     schemes: ['https', 'http'],
 };
 

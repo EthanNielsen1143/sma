@@ -2,38 +2,38 @@
 # Base URL
 GET http://localhost:8080
 
-### ALL Temples
-GET http://localhost:8080/temples
+### ALL spills
+GET http://localhost:8080/spills
 
-### SPECIFIC Temple (first example)
-GET http://localhost:8080/temples/61a921f6028954d4f0319e72
+### SPECIFIC spill (first example)
+GET http://localhost:8080/spills/61a921f6028954d4f0319e72
 
-### Create a new temple
-POST http://localhost:8080/temples HTTP/1.1
+### Create a new spill
+POST http://localhost:8080/spills HTTP/1.1
 content-type: application/json
 
 {
     "_id": "61a921f6028954d4f0319e8a",
-    "temple_id": 30,
+    "spill_id": 30,
     "additionalInfo": false,
-    "name": "Bogotá Colombia Temple",
+    "name": "Bogotá Colombia spill",
     "location": "Bogotá, Distrito Capital, Colombia",
     "dedicated": "24 April 1999"
 }
 
-### Update a temple
-PUT http://localhost:8080/temples/61a921f6028954d4f0319e72 HTTP/1.1
+### Update a spill
+PUT http://localhost:8080/spills/61a921f6028954d4f0319e72 HTTP/1.1
 content-type: application/json
 
 {
     "_id": "61a921f6028954d4f0319e6d",
-    "temple_id": 1,
+    "spill_id": 1,
     "additionalInfo": false,
-    "name": "Aba Nigeria Temple",
+    "name": "Aba Nigeria spill",
     "location": "Aba, Abia, Nigeria",
     "dedicated": "7 August 2005"
 }
 
-### Delete a temple
-DELETE http://localhost:8080/temples/6681ca3bb92d7a105614c3e5 HTTP/1.1
+### Delete a spill
+DELETE http://localhost:8080/spills/6681ca3bb92d7a105614c3e5 HTTP/1.1
 content-type: application/json

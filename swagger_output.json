@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Temples API",
-    "description": "A simple API to manage temples",
+    "title": "spills API",
+    "description": "A simple API to manage spills",
     "version": "1.0.0"
   },
   "host": "webserv34134.onrender.com",
@@ -28,10 +28,10 @@
         }
       }
     },
-    "/temples/": {
+    "/spills/": {
       "get": {
         "tags": [
-          "Temples"
+          "spills"
         ],
         "description": "",
         "produces": [
@@ -45,7 +45,7 @@
       },
       "post": {
         "tags": [
-          "Temples"
+          "spills"
         ],
         "description": "",
         "produces": [
@@ -58,7 +58,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "temple_id": {
+                "spill_id": {
                   "example": "any"
                 },
                 "additional_info": {
@@ -87,10 +87,10 @@
         }
       }
     },
-    "/temples/{id}": {
+    "/spills/{id}": {
       "get": {
         "tags": [
-          "Temples"
+          "spills"
         ],
         "description": "",
         "produces": [
@@ -112,7 +112,7 @@
       },
       "put": {
         "tags": [
-          "Temples"
+          "spills"
         ],
         "description": "",
         "produces": [
@@ -131,7 +131,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "temple_id": {
+                "spill_id": {
                   "example": "any"
                 },
                 "additional_info": {
@@ -161,7 +161,7 @@
       },
       "delete": {
         "tags": [
-          "Temples"
+          "spills"
         ],
         "description": "",
         "produces": [

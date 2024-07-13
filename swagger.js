@@ -2,8 +2,8 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
     info: {
-        title: "Temples API",
-        description: "A simple API to manage temples",
+        title: "spills API",
+        description: "A simple API to manage spills",
     },
     host: "webserv34134.onrender.com",
     schemes: ['https', 'http'],

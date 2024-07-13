@@ -3,7 +3,7 @@ const mongodb = require('./data/database');
 const app = express();  
 const port = process.env.PORT || 8080;
 const routes = require('./routes');
-const temples = require('./routes/temples');
+const spills = require('./routes/spills');
 const bodyParser = require('body-parser');
 const swaggerRoute = require('./routes/swagger');
 const passport = require('passport');
@@ -58,7 +58,7 @@ app.get('/github/callback', passport.authenticate('github', {
 
 //Routes
 app.use('/', routes);
-app.use('/temples', temples);
+app.use('/spills', spills);
 app.use('/api-docs', swaggerRoute);
 
 

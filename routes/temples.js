@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const temples = require('../controllers/temples');
+const spills = require('../controllers/spills');
 const { isAuthenticated } = require('../middleware/authenticate');
 
-router.get('/', temples.getAll);
-router.get('/:id', temples.getSingle);
+router.get('/', spills.getAll);
+router.get('/:id', spills.getSingle);
 
-router.post('/', isAuthenticated, temples.createTemple);
-router.put('/:id', isAuthenticated, temples.updateTemple);
-router.delete('/:id', isAuthenticated, temples.deleteTemple);
+router.post('/', isAuthenticated, spills.createspill);
+router.put('/:id', isAuthenticated, spills.updatespill);
+router.delete('/:id', isAuthenticated, spills.deletespill);
 
 module.exports = router;

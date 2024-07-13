@@ -1,5 +1,6 @@
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
+const { validateSpillData, validateObjectId } = require('../middleware/validate');
 
 const getAll = async (req, res) => {
     //#swagger.tags=['spills']
@@ -14,6 +15,10 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
     //#swagger.tags=['spills']
     const spillId = req.params.id;
+    if (!validateObjectId(spillId)) {
+        res.status(400).send('Invalid spill ID');
+        return;
+    }
     const objectId = ObjectId.createFromHexString(spillId);
 
     const db = mongodb.getDatabase();
@@ -24,14 +29,19 @@ const getSingle = async (req, res) => {
 
 };
 
-const createspill = async (req, res) => {
+const createSpill = async (req, res) => {
     //#swagger.tags=['spills']
+    const validationError = validateSpillData(req.body);
+    if (validationError) {
+        return res.status(400).send(validationError);
+    }
     const spillData = {
         spill_id : req.body.spill_id,
-        additional_info : req.body.additional_info,
-        name : req.body.name,
-        location : req.body.location,
-        dedicated: req.body.dedicated,
+        width : req.body.width,
+        length : req.body.length,
+        material : req.body.material,
+        latitude : req.body.latitude,
+        longitude : req.body.longitude
     };
     try {
         const response = await mongodb.getDatabase().db().collection('spills').insertOne(spillData);
@@ -47,18 +57,24 @@ const createspill = async (req, res) => {
 
 };
 
-const updatespill = async (req, res) => {
+const updateSpill = async (req, res) => {
     //#swagger.tags=['spills']
     const spillId = new ObjectId(req.params.id);
-    const spillColor = {
+    const validationError = validateSpillData(req.body);
+    if (validationError) {
+        return res.status(400).send(validationError);
+    }
+
+    const spillData = {
         spill_id : req.body.spill_id,
-        additional_info : req.body.additional_info,
-        name : req.body.name,
-        location : req.body.location,
-        dedicated: req.body.dedicated,
+        width : req.body.width,
+        length : req.body.length,
+        material : req.body.material,
+        latitude : req.body.latitude,
+        longitude : req.body.longitude
     };
     try {
-        const response = await mongodb.getDatabase().db().collection('spills').replaceOne({ _id: spillId }, spillColor);
+        const response = await mongodb.getDatabase().db().collection('spills').replaceOne({ _id: spillId }, spillData);
         if(response.modifiedCount > 0) {
             res.status(201).send('spill updated successfully');  
         } else {
@@ -70,7 +86,7 @@ const updatespill = async (req, res) => {
     };
 };
 
-const deletespill = async (req, res) => {
+const deleteSpill = async (req, res) => {
     //#swagger.tags=['spills']
     const spillId = new ObjectId(req.params.id);
     try {
@@ -87,4 +103,4 @@ const deletespill = async (req, res) => {
 };
 
 
-module.exports = { getAll, getSingle, createspill, updatespill, deletespill};
+module.exports = { getAll, getSingle, createSpill, updateSpill, deleteSpill};

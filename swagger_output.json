@@ -5,7 +5,7 @@
     "description": "A simple API to manage spills",
     "version": "1.0.0"
   },
-  "host": "webserv34134.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
     "https",
@@ -22,6 +22,32 @@
           "200": {
             "description": "OK"
           },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "description": "",
+        "produces": [
+          null
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "produces": [
+          null
+        ],
+        "responses": {
           "default": {
             "description": ""
           }
@@ -61,16 +87,19 @@
                 "spill_id": {
                   "example": "any"
                 },
-                "additional_info": {
+                "width": {
                   "example": "any"
                 },
-                "name": {
+                "length": {
                   "example": "any"
                 },
-                "location": {
+                "material": {
                   "example": "any"
                 },
-                "dedicated": {
+                "latitude": {
+                  "example": "any"
+                },
+                "longitude": {
                   "example": "any"
                 }
               }
@@ -134,16 +163,19 @@
                 "spill_id": {
                   "example": "any"
                 },
-                "additional_info": {
+                "width": {
                   "example": "any"
                 },
-                "name": {
+                "length": {
                   "example": "any"
                 },
-                "location": {
+                "material": {
                   "example": "any"
                 },
-                "dedicated": {
+                "latitude": {
+                  "example": "any"
+                },
+                "longitude": {
                   "example": "any"
                 }
               }
@@ -162,6 +194,157 @@
       "delete": {
         "tags": [
           "spills"
+        ],
+        "description": "",
+        "produces": [
+          null
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/workers/": {
+      "get": {
+        "tags": [
+          "workers"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "workers"
+        ],
+        "description": "",
+        "produces": [
+          null
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "worker_id": {
+                  "example": "any"
+                },
+                "first_name": {
+                  "example": "any"
+                },
+                "last_name": {
+                  "example": "any"
+                },
+                "position": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/workers/{id}": {
+      "get": {
+        "tags": [
+          "workers"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "workers"
+        ],
+        "description": "",
+        "produces": [
+          null
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "worker_id": {
+                  "example": "any"
+                },
+                "first_name": {
+                  "example": "any"
+                },
+                "last_name": {
+                  "example": "any"
+                },
+                "position": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "workers"
         ],
         "description": "",
         "produces": [

@@ -1,24 +1,24 @@
 const express = require('express');
 const mongodb = require('./data/database');
-const app = express();  
+const app = express();
 const port = process.env.PORT || 8080;
 const routes = require('./routes');
 const spills = require('./routes/spills');
+const workers = require('./routes/workers');
 const bodyParser = require('body-parser');
 const swaggerRoute = require('./routes/swagger');
-const passport = require('passport');
-const session = require('express-session');
-const GitHubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
 
+// Middleware
 app.use(bodyParser.json());
-app.use(session({
-  secret: "secret",
-  resave: false,
-  saveUninitialized: true,
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+// Commenting out session and passport as they're related to OAuth
+// app.use(session({
+//   secret: "secret",
+//   resave: false,
+//   saveUninitialized: true,
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers',
   'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
@@ -29,40 +29,39 @@ app.use((req, res, next) => {
 app.use(cors({origin: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']}));
 app.use(cors({origin: '*'}));
 
-app
-  passport.use(new GitHubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: process.env.CALLBACK_URL 
-  },
-    function(accessToken, refreshToken, profile, done) {
-      return done(null, profile);
-  }
-));
+// Commenting out OAuth related code
+// passport.use(new GitHubStrategy({
+//   clientID: process.env.GITHUB_CLIENT_ID,
+//   clientSecret: process.env.GITHUB_CLIENT_SECRET,
+//   callbackURL: process.env.CALLBACK_URL 
+// },
+//   function(accessToken, refreshToken, profile, done) {
+//     return done(null, profile);
+// }));
 
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-passport.deserializeUser((user, done) => { 
-  done(null, user);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user);
+// });
+// passport.deserializeUser((user, done) => { 
+//   done(null, user);
+// });
 
-app.get('/', (req, res) => {res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : 'Logged Out')});
+// app.get('/', (req, res) => {res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : 'Logged Out')});
 
-app.get('/github/callback', passport.authenticate('github', {
-  failureRedirect: '/api_docs', session: false}),
-  (req, res) => {
-    req.session.user = req.user;
-    res.redirect('/');
-});
+// app.get('/github/callback', passport.authenticate('github', {
+//   failureRedirect: '/api_docs', session: false}),
+//   (req, res) => {
+//     req.session.user = req.user;
+//     res.redirect('/');
+// });
 
-//Routes
+// Routes
 app.use('/', routes);
 app.use('/spills', spills);
+app.use('/workers', workers);
 app.use('/api-docs', swaggerRoute);
 
-
-//error handling middleware
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err); 
   res.status(500).send({ error: "An unexpected error occurred!" });
